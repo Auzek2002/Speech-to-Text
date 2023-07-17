@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech To Text</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Press The Button and speak to convert your speech into text</div>
+        <h5>Say "clear" to clear up the text box</h5>
+        <button  onclick="record()">Click Here</button>
+        <textarea name="" id="speech" cols="60" rows="15"></textarea>
+        <h2 class="footer">Made By: Azaan Nabi Khan</h2>
+    </div>
+    <script>
+        function record(){
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = "en-GB";
+            recognition.onresult = function(event){
+                console.log(event);
+                if(event.results[0][0].transcript == "clear"){
+                    document.getElementById('speech').value="";
+                }
+                else{
+                document.getElementById('speech').value= event.results[0][0].transcript;
+                }
+            }
+
+            recognition.start();
+        }
+    </script>
+</body>
+</html>
